@@ -1,25 +1,21 @@
+import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
-import './Tab1.css';
 
 const Tab1: React.FC = () => {
   return (
+    
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
-      </IonContent>
-    </IonPage>
-  );
+    <IonHeader>
+      <IonToolbar>
+        <IonTitle className="text-center text-lg font-bold text-white">Dashboard</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent className="flex items-center justify-center h-full bg-gray-800"> {/* Cambia el fondo si lo deseas */}
+    </IonContent>
+  </IonPage>
+);
 };
+
 
 export default Tab1;
