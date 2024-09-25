@@ -20,7 +20,7 @@ export default function BasicCard() {
     <Card className="m-8" sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-          Este es un card
+          Este es un cardas
         </Typography>
         <Typography variant="h5" component="div">
           Este es el titulo
