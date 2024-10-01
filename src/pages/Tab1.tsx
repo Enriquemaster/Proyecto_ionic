@@ -50,7 +50,7 @@ const App: React.FC = () => {
         </IonToolbar>
       </IonHeader >
       <IonContent className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ion-padding">
-      <h2 className="text-2xl font-bold mt-4 mb-2 flex flex-col items-center justify-center">Mi primera Calculadora</h2>
+      <h2 className="text-2xl font-bold mt-4 mb-2 flex flex-col items-center justify-center">Mi primera calculador</h2>
       <h2 className="text-sm flex flex-col items-center justify-center">Hecho por:Jose Enrique Caamal kuk</h2>
         <Display value={input} className="w-full text-right text-3xl p-4 border rounded shadow-md" />
         <div className="grid grid-cols-4 gap-2 w-full max-w-md p-4 bg-slate-700">
