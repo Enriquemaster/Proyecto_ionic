@@ -93,6 +93,12 @@ const Tab4: React.FC = () => {
     <li className="text-gray-600"><span className="font-bold">1 mL</span> = 0.033814 fl oz</li>
     </ul>
     <IonButton onClick={handleOpenInputModal} className="mt-6 bg-blue-600 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-700">Iniciar Conversión</IonButton>
+    {outputValue && (
+          <p className="ion-text-center ion-margin-top text-xl text-blue-700 font-semibold">
+            Resultado: {inputValue} {inputUnit} = {outputValue} {outputUnit}
+          </p>
+          
+        )}
   </div>
   </div>
          {/* Modal de entrada */}
@@ -157,12 +163,7 @@ const Tab4: React.FC = () => {
         </IonModal>
 
         {/* Resultado */}
-        {outputValue && (
-          <p className="ion-text-center ion-margin-top text-xl text-blue-700 font-semibold">
-            Resultado: {inputValue} {inputUnit} = {outputValue} {outputUnit}
-          </p>
-          
-        )}
+       
       </IonContent>
     </IonPage>
   );

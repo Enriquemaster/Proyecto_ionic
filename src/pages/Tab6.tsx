@@ -83,6 +83,11 @@ if (inputUnit === 'Hz' && outputUnit === 'kHz') {
           <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Conversión de Frecuencias</h2>
             <IonButton onClick={handleOpenInputModal} className="mt-6 bg-blue-600 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-700">Iniciar Conversión</IonButton>
+            {outputValue && (
+          <p className="ion-text-center ion-margin-top text-xl text-blue-700 font-semibold">
+            Resultado: {inputValue} {inputUnit} = {outputValue} {outputUnit}
+          </p>
+        )}
           </div>
         </div>
 
@@ -148,11 +153,7 @@ if (inputUnit === 'Hz' && outputUnit === 'kHz') {
         </IonModal>
 
         {/* Resultado */}
-        {outputValue && (
-          <p className="ion-text-center ion-margin-top text-xl text-blue-700 font-semibold">
-            Resultado: {inputValue} {inputUnit} = {outputValue} {outputUnit}
-          </p>
-        )}
+    
       </IonContent>
     </IonPage>
   );
