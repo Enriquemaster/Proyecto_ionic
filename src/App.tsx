@@ -17,8 +17,8 @@ import Tab3 from './pages/Tab3';
 import Tab4 from './pages/Tab4';
 import Tab5 from './pages/Tab5';
 import Tab6 from './pages/Tab6';
-import './index.css'; // Asegúrate de que la ruta sea correct
-import Welcome from './pages/welcome/welcome'; // Importa la página Welcome
+import './index.css'; 
+import Welcome from './pages/welcome/welcome'; 
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

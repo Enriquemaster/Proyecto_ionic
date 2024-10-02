@@ -95,7 +95,7 @@ const Tab2: React.FC = () => {
 
             {/* Valores de Entrada */}
             <div className="mb-4">
-              <label htmlFor="inputUnit" className="block text-sm font-medium text-muted-foreground">Tipo de entrada</label>
+              <label htmlFor="inputUnit" className="block text-sm font-medium text-gray-700 text-muted-foreground">Tipo de entrada</label>
               <div className="flex items-center">
                 <input
                   type="number"
