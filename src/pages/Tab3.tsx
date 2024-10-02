@@ -1,79 +1,136 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import Display from './components/Display';
-import Button from './components/Button';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
 
-const App: React.FC = () => {
-  const [input, setInput] = useState<string>("");
+const Tab3: React.FC = () => {
+  const [inputValue, setInputValue] = useState<number | string>('');
+  const [inputUnit, setInputUnit] = useState<string>('C');
+  const [outputValue, setOutputValue] = useState<number | string>('');
+  const [outputUnit, setOutputUnit] = useState<string>('F');
 
-  const handleButtonClick = (value: string) => {
-    // Permite solo números y los operadores permitidos
-    if (/^[0-9+\-*/]*$/.test(input + value)) {
-      setInput(prev => prev + value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleInputUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInputUnit(e.target.value);
+  };
+
+  const handleOutputUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOutputUnit(e.target.value);
+  };
+
+  const convertUnits = () => {
+    let result: number = 0;
+    const input = typeof inputValue === 'string' ? parseFloat(inputValue) : inputValue;
+
+    if (isNaN(input)) {
+      setOutputValue('Error');
+      return;
     }
-  };
 
-  const calculateResult = () => {
-    try {
-      // Evaluar la expresión solo con operadores permitidos
-      const result = eval(input);
-      setInput(String(result));
-    } catch (error) {
-      setInput("Error");
+    // Lógica de conversión de temperaturas
+    if (inputUnit === 'C' && outputUnit === 'F') {
+      result = (input * 9) / 5 + 32; // Celsius a Fahrenheit
+    } else if (inputUnit === 'F' && outputUnit === 'C') {
+      result = ((input - 32) * 5) / 9; // Fahrenheit a Celsius
+    } else if (inputUnit === 'C' && outputUnit === 'K') {
+      result = input + 273.15; // Celsius a Kelvin
+    } else if (inputUnit === 'K' && outputUnit === 'C') {
+      result = input - 273.15; // Kelvin a Celsius
+    } else if (inputUnit === 'F' && outputUnit === 'K') {
+      result = ((input - 32) * 5) / 9 + 273.15; // Fahrenheit a Kelvin
+    } else if (inputUnit === 'K' && outputUnit === 'F') {
+      result = ((input - 273.15) * 9) / 5 + 32; // Kelvin a Fahrenheit
+    } else {
+      result = input; // Mismos tipos de unidad
     }
-  };
 
-  const clearInput = () => {
-    setInput("");
+    setOutputValue(result);
+    setInputValue(''); // Reiniciar el valor de entrada a 0
   };
-
-  interface DisplayProps {
-    value: string;
-    className?: string; // Agregar esta línea
-  }
-  
-  const Display: React.FC<DisplayProps> = ({ value, className }) => {
-    return (
-      <div className={`text-right ${className}`}>
-        {value}
-      </div>
-    );
-  };
-
 
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className="text-center text-lg">Convertidor de Peso</IonTitle>
+        <IonTitle className="text-white text-center font-bold bg-gradient-to-r from-blue-500 to-indigo-600 py-4 shadow-lg ">
+            Conversión de Unidades de Temperatura
+          </IonTitle>
         </IonToolbar>
-      </IonHeader >
-      <IonContent className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ion-padding">
-      <h2 className="text-2xl font-bold mt-4 mb-2 flex flex-col items-center justify-center">Ingresa las unidades a convertir</h2>
-      <h2 className="text-sm flex flex-col items-center justify-center"></h2>
-        <Display value={input} className="w-full text-right text-3xl p-4 border rounded shadow-md" />
-        <div className="grid grid-cols-4 gap-2 w-full max-w-md p-4 bg-slate-700">
-          <Button label="7" onClick={() => handleButtonClick("7")} />
-          <Button label="8" onClick={() => handleButtonClick("8")} />
-          <Button label="9" onClick={() => handleButtonClick("9")} />
-          <Button label="cm" onClick={() => handleButtonClick("cm")} />
-          <Button label="4" onClick={() => handleButtonClick("4")} />
-          <Button label="5" onClick={() => handleButtonClick("5")} />
-          <Button label="6" onClick={() => handleButtonClick("6")} />
-          <Button label="m" onClick={() => handleButtonClick("m")} />
-          <Button label="1" onClick={() => handleButtonClick("1")} />
-          <Button label="2" onClick={() => handleButtonClick("2")} />
-          <Button label="3" onClick={() => handleButtonClick("3")} />
-          <Button label="km" onClick={() => handleButtonClick("km")} />
-          <Button label="0" onClick={() => handleButtonClick("0")} />
-          <Button label="C" onClick={clearInput} />
-          <Button label="mi" onClick={() => handleButtonClick("mi")} />
-          <Button label="=" onClick={calculateResult} />
+      </IonHeader>
+      <IonContent className="bg-gradient-to-r from-blue-100 to-indigo-200 min-h-screen flex justify-center items-center p-6 h-full">
+        <div className="bg-blue-100 p-6 rounded-b-lg shadow-lg max-w-lg w-full h-full">
+          <div className="p-6 bg-white  rounded-lg shadow-md w-full max-w-md">
+            <h1 className="text-center text-2xl font-bold text-foreground mb-6 text-gray-700">Conversión de Temperatura</h1>
+
+            {/* Valores de Entrada */}
+            <div className="mb-4">
+              <label htmlFor="inputUnit" className="block text-sm font-medium text-muted-foreground text-gray-700">Temperatura de entrada</label>
+              <div className="flex items-center">
+                <input
+                  type="number"
+                  className="border border-border rounded-md p-2 mr-2 w-full"
+                  placeholder="0"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  id="inputValue"
+                />
+                <select
+                  id="inputUnit"
+                  className="border border-border rounded-md p-2"
+                  value={inputUnit}
+                  onChange={handleInputUnitChange}
+                >
+                  <option value="C">°C</option>
+                  <option value="F">°F</option>
+                  <option value="K">K</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Salida */}
+            <div className="text-center font-bold text-lg text-muted-foreground mb-4 text-gray-700">Hasta</div>
+            <div className="mb-4">
+              <label htmlFor="outputUnit" className="block text-sm font-medium text-muted-foreground text-gray-700">Temperatura de salida</label>
+              <div className="flex items-center">
+                <input
+                  type="text"
+                  className="border border-border rounded-md p-2 mr-2 w-full"
+                  value={outputValue}
+                  readOnly
+                  id="outputValue"
+                  title="Valor convertido"
+                  placeholder="0"
+                />
+                <select
+                  id="outputUnit"
+                  className="border border-border rounded-md p-2"
+                  value={outputUnit}
+                  onChange={handleOutputUnitChange}
+                >
+                  <option value="C">°C</option>
+                  <option value="F">°F</option>
+                  <option value="K">K</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Botón de conversión */}
+            <div className="text-center mb-4">
+              <IonButton onClick={convertUnits}>Convertir</IonButton>
+            </div>
+
+            {/* Información de la conversión */}
+            <div className="mt-4 p-4 bg-card rounded-md">
+              <h3 className="font-semibold text-muted-foreground text-gray-700">CONVERSIÓN</h3>
+              <p className="text-muted-foreground text-gray-700">El resultado de la conversión es {outputValue} {outputUnit}</p>
+            </div>
+          </div>
         </div>
       </IonContent>
     </IonPage>
   );
 };
 
-export default App;
+export default Tab3;
