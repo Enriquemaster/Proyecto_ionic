@@ -29,48 +29,70 @@ const Tab2: React.FC = () => {
     }
 
     // Lógica de conversión
-  if (inputUnit === 'cm' && outputUnit === 'mm') {
-    result = input * 10; // cm a mm
-  } else if (inputUnit === 'cm' && outputUnit === 'mi') {
-    result = input / 2; // cm a mi
-  } else if (inputUnit === 'mm' && outputUnit === 'cm') {
-    result = input / 10; // mm a cm
-  } else if (inputUnit === 'cm' && outputUnit === 'in') {
-    result = input / 2.54; // cm a in
-  } else if (inputUnit === 'in' && outputUnit === 'cm') {
-    result = input * 2.54; // in a cm
-  } else if (inputUnit === 'cm' && outputUnit === 'm') {
-    result = input / 100; // cm a m
-  } else if (inputUnit === 'm' && outputUnit === 'cm') {
-    result = input * 100; // m a cm
-  } else if (inputUnit === 'm' && outputUnit === 'km') {
-    result = input / 1000; // m a km
-  } else if (inputUnit === 'km' && outputUnit === 'm') {
-    result = input * 1000; // km a m
-  } else if (inputUnit === 'km' && outputUnit === 'cm') {
-    result = input * 100000; // km a cm
-  } else if (inputUnit === 'cm' && outputUnit === 'km') {
-    result = input / 100000; // cm a km
-  } else if (inputUnit === 'mi' && outputUnit === 'km') {
-    result = input * 1.60934; // mi a km
-  } else if (inputUnit === 'km' && outputUnit === 'mi') {
-    result = input / 1.60934; // km a mi
-  } else if (inputUnit === 'ft' && outputUnit === 'm') {
-    result = input * 0.3048; // ft a m
-  } else if (inputUnit === 'm' && outputUnit === 'ft') {
-    result = input / 0.3048; // m a ft
-  } else if (inputUnit === 'yd' && outputUnit === 'm') {
-    result = input * 0.9144; // yd a m
-  } else if (inputUnit === 'm' && outputUnit === 'yd') {
-    result = input / 0.9144; // m a yd
-  } else {
-    result = input; // Mismos tipos de unidad
-  }
-
+    if (inputUnit === 'cm' && outputUnit === 'mm') {
+      result = input * 10; // cm a mm
+    } else if (inputUnit === 'mm' && outputUnit === 'cm') {
+      result = input / 10; // mm a cm
+    } else if (inputUnit === 'cm' && outputUnit === 'in') {
+      result = input / 2.54; // cm a in
+    } else if (inputUnit === 'in' && outputUnit === 'cm') {
+      result = input * 2.54; // in a cm
+    } else if (inputUnit === 'cm' && outputUnit === 'm') {
+      result = input / 100; // cm a m
+    } else if (inputUnit === 'm' && outputUnit === 'cm') {
+      result = input * 100; // m a cm
+    } else if (inputUnit === 'm' && outputUnit === 'km') {
+      result = input / 1000; // m a km
+    } else if (inputUnit === 'km' && outputUnit === 'm') {
+      result = input * 1000; // km a m
+    } else if (inputUnit === 'km' && outputUnit === 'cm') {
+      result = input * 100000; // km a cm
+    } else if (inputUnit === 'cm' && outputUnit === 'km') {
+      result = input / 100000; // cm a km
+    } else if (inputUnit === 'mi' && outputUnit === 'km') {
+      result = input * 1.60934; // mi a km
+    } else if (inputUnit === 'km' && outputUnit === 'mi') {
+      result = input / 1.60934; // km a mi
+    } else if (inputUnit === 'ft' && outputUnit === 'm') {
+      result = input * 0.3048; // ft a m
+    } else if (inputUnit === 'm' && outputUnit === 'ft') {
+      result = input / 0.3048; // m a ft
+    } else if (inputUnit === 'yd' && outputUnit === 'm') {
+      result = input * 0.9144; // yd a m
+    } else if (inputUnit === 'm' && outputUnit === 'yd') {
+      result = input / 0.9144; // m a yd
+    } else if (inputUnit === 'mm' && outputUnit === 'km') {
+      result = input / 1000000; // mm a km
+    } else if (inputUnit === 'mm' && outputUnit === 'yd') {
+      result = input / 914.4; // mm a yd
+    } else if (inputUnit === 'mm' && outputUnit === 'ft') {
+      result = input / 304.8; // mm a ft
+    } else if (inputUnit === 'mm' && outputUnit === 'mi') {
+      result = input / 1.609e+6; // mm a mi
+    } else if (inputUnit === 'mm' && outputUnit === 'in') {
+      result = input / 25.4; // mm a in
+    } else if (inputUnit === 'yd' && outputUnit === 'mm') {
+      result = input * 914.4; // yd a mm
+    } else if (inputUnit === 'in' && outputUnit === 'mm') {
+      result = input * 25.4; // in a mm
+    } else if (inputUnit === 'ft' && outputUnit === 'mm') {
+      result = input * 304.8; // ft a mm
+    } else if (inputUnit === 'mi' && outputUnit === 'mm') {
+      result = input * 1.609e+6; // mi a mm
+    } else if (inputUnit === 'yd' && outputUnit === 'km') {
+      result = input * 0.0009144; // yd a km
+    } else if (inputUnit === 'ft' && outputUnit === 'km') {
+      result = input * 0.0003048; // ft a km
+    } else if (inputUnit === 'in' && outputUnit === 'km') {
+      result = input * 2.54e-5; // in a km
+    } else {
+      result = input; // Mismos tipos de unidad
+    }
 
     setOutputValue(result);
     setInputValue(''); // Reiniciar el valor de entrada a 0
   };
+    
 
    // Usar useEffect para actualizar la conversión cuando cambian las unidades
    useEffect(() => {
